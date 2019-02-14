@@ -33,7 +33,7 @@ public class Auxiliar {
 
     public static Properties getProp() throws IOException {
         Properties props = new Properties();
-        FileInputStream file = new FileInputStream("C:\\philippesis\\oglehubversions\\dados.properties");
+        FileInputStream file = new FileInputStream(Utils.getInstance().getAppPath("asset") + "\\dados.properties");
         //FileInputStream file = new FileInputStream("dados.properties");
         props.load(file);
         return props;
@@ -43,7 +43,7 @@ public class Auxiliar {
     //Escrever no properties
     public void escreverProp(int versao, String versionar, String versionamento, String alteracoes) {
         //Ler
-        File file = new File("C:\\philippesis\\oglehubversions\\dados.properties");
+        File file = new File(Utils.getInstance().getAppPath("asset") + "\\dados.properties");
         //File file = new File("dados.properties");
         Properties properties = new Properties();
         try {
