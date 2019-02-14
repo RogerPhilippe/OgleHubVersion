@@ -5,6 +5,14 @@
  */
 package gui;
 
+import auxiliar.Auxiliar;
+import auxiliar.Propriedades;
+import auxiliar.Utils;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -12,16 +20,6 @@ import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFileChooser;
-import auxiliar.Auxiliar;
-import auxiliar.Propriedades;
-import dados.Conexao;
-import javax.swing.JOptionPane;
-import java.awt.SystemTray;
-import java.awt.TrayIcon;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import javax.swing.ImageIcon;
 
 /**
  *
@@ -38,15 +36,12 @@ public class Principal extends javax.swing.JFrame {
 	private File arquivoVersionar, arquivoVersionamento, caminhoAbisoluto;
     private int versao, progresso;
     private Auxiliar auxiliar;
-    private Propriedades propriedades;
-    private final Conexao conexao;
     private String alteracoes = "null";
     private final String icoPath;
 
-    public Principal() {
+    private Principal() {
         initComponents();
-        conexao = new Conexao();
-        icoPath = "C:\\PhilippeSis\\oglehubversions\\ogleV.png";
+        icoPath = Utils.getInstance().getAppPath("asset") +  "\\ogleV.png";
     }
 
     /**
@@ -477,7 +472,7 @@ public class Principal extends javax.swing.JFrame {
         //Cria, exibe o fCHPrincipal e coleta pasta de retorno.
         try {
             File file = fCHPrincipal.getSelectedFile();
-            //Variáel recebe arquivo (pasta)
+            //Variael recebe arquivo (pasta)
             arquivoVersionar = file;
             txtVersionar.setText(file.getPath());
         } catch (Exception e) {
@@ -528,7 +523,7 @@ public class Principal extends javax.swing.JFrame {
         auxiliar = new Auxiliar();
         try {
             //Escrever dados vindos do arquivo propriedades
-            propriedades = new Propriedades();
+            Propriedades propriedades = new Propriedades();
             propriedades = auxiliar.lerProp();
             versao = propriedades.getVersao();
             alteracoes = propriedades.getAlteracoes();
